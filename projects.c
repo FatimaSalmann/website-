@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -93,17 +93,27 @@
       font-size: 36px;
       font-family: Broadway, sans-serif;
     }
-
-    /* Projects Section */
-    #projects {
-      display: none;
+/* Projects Section */
+#projects {
+      display: none; /* Hide the projects section by default */
       margin-top: 40px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjusted grid */
+      grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
       gap: 30px;
       padding: 0 20px;
+      justify-items: center; /* Centers items horizontally in their grid cells */
+      width: 100%; /* Ensures the projects container takes full width */
+      max-width: 1200px; /* Optionally limit the width to avoid stretching on large screens */
+      margin: 0 auto; /* Centers the entire container horizontally */
     }
 
+    @media (max-width: 768px) {
+      #projects {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+      }
+    }
+
+    /* Ensure the project cards take up the full width of the grid cell */
     .project-card {
       background-color: #ffffff;
       border-radius: 12px;
@@ -113,16 +123,18 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      width: 100%; /* Ensures the card takes the full width of the grid cell */
       position: relative;
     }
 
     .project-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover; /* Ensure image fills container proportionally */
-      border-bottom: 4px solid #003366; /* Separation with bottom border */
+      width: 100%; /* Ensures the image stretches to fill the card */
+      height: 100%; /* Makes the image fill the entire container vertically */
+      object-fit: cover; /* Ensures the image fills the container while preserving aspect ratio */
+      border-bottom: 4px solid #003366; /* Optional bottom border to separate image from text */
     }
 
+    /* Content area for text */
     .project-card .content {
       padding: 20px;
       flex-grow: 1;
@@ -149,21 +161,37 @@
       box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* Elevate card on hover */
     }
 
-    @media (max-width: 768px) {
-      .project-card img {
-        height: 150px;
-      }
+    /* Aesthetic for "Have a look at our recent projects" */
+    #projects-subheading {
+        display: none;
+      text-align: center;
+      color: #003366; /* Dark blue color */
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 20px 0;
+      letter-spacing: 2px; /* Letter spacing for a clean look */
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Text shadow for subtle depth */
     }
+    #projects-heading {
+  display: none; /* Hide "Our Projects" heading by default */
+  text-align: center;
+  color: #003366; /* Dark blue color */
+  font-size: 36px;
+  font-family: Broadway, sans-serif;
+  margin-top: 50px;
+}
   </style>
 </head>
 <body>
   <header>
     <nav class="navbar">
       <ul class="nav-list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="javascript:void(0);" id="home-link">Home</a></li>
+        <li><a href="javascript:void(0);" id="about-link">About</a></li>
         <li><a href="javascript:void(0);" id="services-link">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="javascript:void(0);" id="contact-link">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -172,9 +200,12 @@
   <h5>by Theo James</h5>
 
   <section id="services">
-    <h2>Our Projects</h2>
-    <h4 style="text-align: center; color: #003366; font-size: 36px; font-family: 'Poppins', sans-serif; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin: 20px 0; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">Have a look at our recent projects:</h4>
-
+    <h2 id="projects-heading" style="text-align: center; color: #003366; font-size: 36px; font-family: Broadway, sans-serif; margin-top: 50px;">
+        Our Projects
+      </h2>
+    <h4 id="projects-subheading" style="text-align: center; color: #003366; font-size: 36px; font-family: 'Poppins', sans-serif; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin: 20px 0; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+        Have a look at our recent projects:
+      </h4>
 
     <div id="projects">
       <!-- First Project -->
@@ -238,14 +269,30 @@
     <p>&copy; 2024 Theo James. All rights reserved.</p>
   </footer>
   <script>
+    // Initially hide the projects and subheading section
+    document.getElementById('projects').style.display = 'none';
+    document.getElementById('projects-subheading').style.display = 'none';
+
+    // Show projects and subheading when the "Services" tab is clicked
     document.getElementById('services-link').addEventListener('click', function() {
-      var projects = document.getElementById('projects');
-      // Toggle projects visibility only inside the services section
-      if (projects.style.display === "none" || projects.style.display === "") {
-        projects.style.display = "grid"; // Show projects when Services is clicked
-      } else {
-        projects.style.display = "none"; // Hide projects when clicked again
-      }
+      document.getElementById('projects').style.display = 'grid'; // Show projects
+      document.getElementById('projects-subheading').style.display = 'block'; // Show subheading
+    });
+
+    // Hide projects and subheading when any other tab is clicked
+    document.getElementById('home-link').addEventListener('click', function() {
+      document.getElementById('projects').style.display = 'none'; // Hide projects
+      document.getElementById('projects-subheading').style.display = 'none'; // Hide subheading
+    });
+
+    document.getElementById('about-link').addEventListener('click', function() {
+      document.getElementById('projects').style.display = 'none'; // Hide projects
+      document.getElementById('projects-subheading').style.display = 'none'; // Hide subheading
+    });
+
+    document.getElementById('contact-link').addEventListener('click', function() {
+      document.getElementById('projects').style.display = 'none'; // Hide projects
+      document.getElementById('projects-subheading').style.display = 'none'; // Hide subheading
     });
   </script>
 
