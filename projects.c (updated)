@@ -264,9 +264,7 @@
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2024 Theo James. All rights reserved.</p>
-  </footer>
+ 
   <script>
     // Initially hide the projects and subheading section
     document.getElementById('projects').style.display = 'none';
