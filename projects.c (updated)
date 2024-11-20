@@ -188,7 +188,6 @@
   <header>
     <nav class="navbar">
       <ul class="nav-list">
-        <li><a href="javascript:void(0);" id="home-link">Home</a></li>
         <li><a href="javascript:void(0);" id="about-link">About</a></li>
         <li><a href="javascript:void(0);" id="services-link">Services</a></li>
         <li><a href="javascript:void(0);" id="contact-link">Contact</a></li>
@@ -277,12 +276,6 @@
     document.getElementById('services-link').addEventListener('click', function() {
       document.getElementById('projects').style.display = 'grid'; // Show projects
       document.getElementById('projects-subheading').style.display = 'block'; // Show subheading
-    });
-
-    // Hide projects and subheading when any other tab is clicked
-    document.getElementById('home-link').addEventListener('click', function() {
-      document.getElementById('projects').style.display = 'none'; // Hide projects
-      document.getElementById('projects-subheading').style.display = 'none'; // Hide subheading
     });
 
     document.getElementById('about-link').addEventListener('click', function() {
